@@ -4,8 +4,8 @@ Aplicação front-end que consome em tempo real a [Rick and Morty API](https://r
 
 Projeto desenvolvido para a disciplina de **Web Development Front-End**, utilizando apenas **HTML, CSS e JavaScript puro** (sem frameworks).
 
-🔗 **Site publicado:** _adicione aqui o link do GitHub Pages_
-🎥 **Vídeo pitch:** _adicione aqui o link do YouTube_
+**Site publicado:** _adicione aqui o link do GitHub Pages_
+**Vídeo pitch:** _adicione aqui o link do YouTube_
 
 ---
 
@@ -87,6 +87,6 @@ Estrutura resumida da resposta:
 4. Os elementos são encaixados com `appendChild` e inseridos em `#lista-cards`.
 5. Eventos (`addEventListener`) disparam novas buscas ao filtrar, pesquisar ou mudar de página.
 
-## 📄 Créditos
+## Créditos
 
 Dados fornecidos pela [Rick and Morty API](https://rickandmortyapi.com/). Rick and Morty é propriedade de seus respectivos detentores; este projeto tem fins exclusivamente educacionais.
