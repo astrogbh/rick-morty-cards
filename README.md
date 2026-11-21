@@ -1,4 +1,4 @@
-# 🛸 Rick & Morty — Cards de Personagens
+# Rick & Morty — Cards de Personagens
 
 Aplicação front-end que consome em tempo real a [Rick and Morty API](https://rickandmortyapi.com/) e exibe os personagens em **cards criados dinamicamente com JavaScript**.
 
@@ -9,7 +9,7 @@ Projeto desenvolvido para a disciplina de **Web Development Front-End**, utiliza
 
 ---
 
-## ✨ Funcionalidades
+## Funcionalidades
 
 - Cards gerados 100% via JavaScript (`createElement` + `appendChild`); o HTML possui apenas um container vazio.
 - Cada card exibe **nome, imagem, status, espécie, gênero, origem e número de episódios**.
@@ -20,7 +20,7 @@ Projeto desenvolvido para a disciplina de **Web Development Front-End**, utiliza
 - Tratamento de **carregando**, **erro de rede** e **nenhum resultado** (404 da API).
 - Layout **responsivo** (CSS Grid) para desktop e celular.
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 | Tecnologia | Uso |
 |---|---|
@@ -28,7 +28,7 @@ Projeto desenvolvido para a disciplina de **Web Development Front-End**, utiliza
 | CSS3 | Estilo, variáveis CSS, Grid, tema inspirado no portal verde da série |
 | JavaScript (ES6+) | `fetch`, `async/await`, manipulação do DOM, eventos, `localStorage` |
 
-## 📁 Estrutura do projeto
+## Estrutura do projeto
 
 ```
 rick-morty-cards/
@@ -37,7 +37,7 @@ rick-morty-cards/
 └── script.js    # Consumo da API e criação dos cards
 ```
 
-## ▶️ Como executar
+## Como executar
 
 Não é necessário instalar nada nem criar token.
 
@@ -50,7 +50,7 @@ Não é necessário instalar nada nem criar token.
 
 > É preciso estar conectado à internet, pois os dados vêm da API em tempo real.
 
-## 🌐 API utilizada
+## API utilizada
 
 - **Documentação:** https://rickandmortyapi.com/documentation
 - **Endpoint:** `GET https://rickandmortyapi.com/api/character`
@@ -79,18 +79,13 @@ Estrutura resumida da resposta:
 }
 ```
 
-## 🧠 Como funciona (resumo do código)
+## Como funciona (resumo do código)
 
 1. `buscarPersonagens()` monta a URL com os filtros e chama a API com `fetch`.
 2. A resposta é convertida com `resposta.json()`.
 3. Para cada personagem, `criarCard()` cria os elementos com `document.createElement`.
 4. Os elementos são encaixados com `appendChild` e inseridos em `#lista-cards`.
 5. Eventos (`addEventListener`) disparam novas buscas ao filtrar, pesquisar ou mudar de página.
-
-## 👤 Autor
-
-**Seu Nome** — Ciência da Computação
-[GitHub](https://github.com/SEU_USUARIO)
 
 ## 📄 Créditos
 
