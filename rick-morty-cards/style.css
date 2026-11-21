@@ -1,0 +1,123 @@
+/* PASSO 2: a aparência. Tema inspirado no portal verde de Rick and Morty. */
+
+/* Variáveis CSS: mude as cores aqui e o site inteiro muda */
+:root {
+  --fundo: #0d1117;
+  --fundo-card: #161b22;
+  --verde: #97ce4c;      /* verde do portal */
+  --azul: #44c9f0;
+  --texto: #e6edf3;
+  --texto-suave: #9da7b3;
+  --vermelho: #ff5d5d;
+  --amarelo: #f5c542;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #14301f 0%, var(--fundo) 45%);
+  color: var(--texto);
+  min-height: 100vh;
+  padding: 0 16px;
+}
+
+/* ---------- Topo ---------- */
+.topo { text-align: center; padding: 40px 0 24px; }
+.topo h1 {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  color: var(--verde);
+  text-shadow: 0 0 18px rgba(151, 206, 76, 0.55);
+  letter-spacing: 1px;
+}
+.topo h1 span { color: var(--azul); }
+.topo p { color: var(--texto-suave); margin-top: 8px; }
+
+/* ---------- Controles ---------- */
+.controles {
+  max-width: 900px;
+  margin: 0 auto 20px;
+  display: flex;
+  flex-wrap: wrap;        /* quebra linha no celular */
+  gap: 10px;
+}
+.controles input, .controles select, .controles button, .paginacao button {
+  font: inherit;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+  background: var(--fundo-card);
+  color: var(--texto);
+}
+.controles input { flex: 1 1 220px; }
+.controles input:focus, .controles select:focus { outline: 2px solid var(--verde); }
+button { cursor: pointer; transition: 0.2s; }
+button:hover:not(:disabled) { border-color: var(--verde); color: var(--verde); }
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+#btn-favoritos.ativo { background: var(--vermelho); border-color: var(--vermelho); color: #fff; }
+
+.mensagem { text-align: center; color: var(--texto-suave); min-height: 24px; margin-bottom: 10px; }
+
+/* ---------- Grid de cards ---------- */
+/* auto-fill + minmax = colunas automáticas, responsivo sem media query */
+.grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+/* ---------- Card (baseado no layout do enunciado) ---------- */
+.card {
+  position: relative;
+  background: var(--fundo-card);
+  border: 1px solid #30363d;
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(151, 206, 76, 0.25);
+  border-color: var(--verde);
+}
+.card h2 { font-size: 1.1rem; margin: 0 28px 12px; }   /* margem lateral abre espaço pro coração */
+.card img {
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid var(--verde);
+}
+.card ul { list-style: none; margin-top: 14px; text-align: left; font-size: 0.9rem; color: var(--texto-suave); }
+.card li { padding: 3px 0; }
+.card li strong { color: var(--texto); }
+
+/* Botão de coração (canto superior direito, como no layout) */
+.btn-coracao {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--vermelho);
+  padding: 0;
+  line-height: 1;
+}
+
+/* Bolinha de status */
+.status { display: inline-flex; align-items: center; gap: 6px; }
+.status::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--amarelo); }
+.status.alive::before { background: var(--verde); }
+.status.dead::before { background: var(--vermelho); }
+
+/* ---------- Paginação e rodapé ---------- */
+.paginacao {
+  display: flex; justify-content: center; align-items: center;
+  gap: 16px; margin: 30px 0;
+}
+.rodape { text-align: center; color: var(--texto-suave); padding: 20px 0 30px; font-size: 0.85rem; }
+.rodape a { color: var(--azul); }

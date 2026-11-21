@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <!-- viewport: faz o site se ajustar ao celular (responsivo) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rick and Morty - Personagens</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topo">
+    <h1>Rick <span>&amp;</span> Morty</h1>
+    <p>Personagens consumidos em tempo real da API pública</p>
+  </header>
+
+  <main>
+    <!-- Barra de busca e filtros -->
+    <section class="controles">
+      <input type="text" id="busca" placeholder="Buscar personagem pelo nome..." />
+      <select id="filtro-status">
+        <option value="">Todos os status</option>
+        <option value="alive">Vivo (Alive)</option>
+        <option value="dead">Morto (Dead)</option>
+        <option value="unknown">Desconhecido</option>
+      </select>
+      <button id="btn-favoritos" type="button">♥ Só favoritos</button>
+    </section>
+
+    <!-- Mensagens de carregando / erro / nada encontrado -->
+    <p id="mensagem" class="mensagem"></p>
+
+    <!-- AQUI o JavaScript vai inserir os cards. Começa vazio de propósito. -->
+    <section id="lista-cards" class="grid"></section>
+
+    <!-- Paginação -->
+    <nav class="paginacao">
+      <button id="btn-anterior" type="button">← Anterior</button>
+      <span id="info-pagina"></span>
+      <button id="btn-proxima" type="button">Próxima →</button>
+    </nav>
+  </main>
+
+  <footer class="rodape">
+    Dados: <a href="https://rickandmortyapi.com/" target="_blank" rel="noopener">rickandmortyapi.com</a>
+  </footer>
+
+  <!-- O script vem por último, para o HTML já existir quando o JS rodar -->
+  <script src="script.js"></script>
+</body>
+</html>
