@@ -2,19 +2,21 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <!-- Responsivo -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rick and Morty - Personagens</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+  <!-- Topo -->
   <header class="topo">
     <h1>Rick <span>&amp;</span> Morty</h1>
     <p>Personagens consumidos em tempo real da API pública</p>
   </header>
 
   <main>
-    <!-- Barra de busca e filtros -->
+    <!-- Busca e filtros -->
     <section class="controles">
       <input type="text" id="busca" placeholder="Buscar personagem pelo nome..." />
       <select id="filtro-status">
@@ -26,10 +28,10 @@
       <button id="btn-favoritos" type="button">♥ Só favoritos</button>
     </section>
 
-    <!-- Mensagens de carregando / erro / nada encontrado -->
+    <!-- Mensagens -->
     <p id="mensagem" class="mensagem"></p>
 
-    <!-- Inserção dos Dados -->
+    <!-- Cards (criados pelo JS) -->
     <section id="lista-cards" class="grid"></section>
 
     <!-- Paginação -->
@@ -40,11 +42,12 @@
     </nav>
   </main>
 
+  <!-- Rodapé -->
   <footer class="rodape">
     Dados: <a href="https://rickandmortyapi.com/" target="_blank" rel="noopener">rickandmortyapi.com</a>
   </footer>
 
-  <!-- O script vem por último, para o HTML já existir quando o JS rodar -->
+  <!-- Script por último -->
   <script src="script.js"></script>
 </body>
 </html>

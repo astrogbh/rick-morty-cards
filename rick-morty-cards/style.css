@@ -1,10 +1,8 @@
-/* PASSO 2: a aparência. Tema inspirado no portal verde de Rick and Morty. */
-
-/* Variáveis CSS: mude as cores aqui e o site inteiro muda */
+/* Cores */
 :root {
   --fundo: #0d1117;
   --fundo-card: #161b22;
-  --verde: #97ce4c;      /* verde do portal */
+  --verde: #97ce4c;      /* Portal */
   --azul: #44c9f0;
   --texto: #e6edf3;
   --texto-suave: #9da7b3;
@@ -12,6 +10,7 @@
   --amarelo: #f5c542;
 }
 
+/* Reset */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -22,7 +21,7 @@ body {
   padding: 0 16px;
 }
 
-/* ---------- Topo ---------- */
+/* Topo */
 .topo { text-align: center; padding: 40px 0 24px; }
 .topo h1 {
   font-size: clamp(2rem, 6vw, 3.5rem);
@@ -33,12 +32,12 @@ body {
 .topo h1 span { color: var(--azul); }
 .topo p { color: var(--texto-suave); margin-top: 8px; }
 
-/* ---------- Controles ---------- */
+/* Controles */
 .controles {
   max-width: 900px;
   margin: 0 auto 20px;
   display: flex;
-  flex-wrap: wrap;        /* quebra linha no celular */
+  flex-wrap: wrap;        /* Quebra linha */
   gap: 10px;
 }
 .controles input, .controles select, .controles button, .paginacao button {
@@ -56,10 +55,10 @@ button:hover:not(:disabled) { border-color: var(--verde); color: var(--verde); }
 button:disabled { opacity: 0.4; cursor: not-allowed; }
 #btn-favoritos.ativo { background: var(--vermelho); border-color: var(--vermelho); color: #fff; }
 
+/* Mensagem */
 .mensagem { text-align: center; color: var(--texto-suave); min-height: 24px; margin-bottom: 10px; }
 
-/* ---------- Grid de cards ---------- */
-/* auto-fill + minmax = colunas automáticas, responsivo sem media query */
+/* Grid responsivo */
 .grid {
   max-width: 1100px;
   margin: 0 auto;
@@ -68,7 +67,7 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   gap: 20px;
 }
 
-/* ---------- Card (baseado no layout do enunciado) ---------- */
+/* Card */
 .card {
   position: relative;
   background: var(--fundo-card);
@@ -78,12 +77,13 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   text-align: center;
   transition: transform 0.2s, box-shadow 0.2s;
 }
+/* Efeito hover */
 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 8px 24px rgba(151, 206, 76, 0.25);
   border-color: var(--verde);
 }
-.card h2 { font-size: 1.1rem; margin: 0 28px 12px; }   /* margem lateral abre espaço pro coração */
+.card h2 { font-size: 1.1rem; margin: 0 28px 12px; }   /* Espaço do coração */
 .card img {
   width: 100%;
   max-width: 200px;
@@ -96,7 +96,7 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
 .card li { padding: 3px 0; }
 .card li strong { color: var(--texto); }
 
-/* Botão de coração (canto superior direito, como no layout) */
+/* Coração */
 .btn-coracao {
   position: absolute;
   top: 10px; right: 10px;
@@ -114,10 +114,12 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
 .status.alive::before { background: var(--verde); }
 .status.dead::before { background: var(--vermelho); }
 
-/* ---------- Paginação e rodapé ---------- */
+/* Paginação */
 .paginacao {
   display: flex; justify-content: center; align-items: center;
   gap: 16px; margin: 30px 0;
 }
+
+/* Rodapé */
 .rodape { text-align: center; color: var(--texto-suave); padding: 20px 0 30px; font-size: 0.85rem; }
 .rodape a { color: var(--azul); }

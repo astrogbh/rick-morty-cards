@@ -1,18 +1,15 @@
-// PASSO 3: a lógica. Aqui o site "conversa" com a API e cria os cards.
-
-// ---------- 1) Configurações e estado ----------
+// Configuração
 const API_URL = "https://rickandmortyapi.com/api/character";
 
-// "estado" guarda o que o usuário escolheu no momento
+// Estado
 let paginaAtual = 1;
 let totalPaginas = 1;
 
-// Favoritos ficam salvos no navegador (localStorage) mesmo se fechar a aba.
-// Guardamos um objeto { id: personagem } para poder mostrar favoritos sem chamar a API.
+// Favoritos salvos no navegador
 let favoritos = JSON.parse(localStorage.getItem("favoritos") || "{}");
 let mostrandoFavoritos = false;
 
-// ---------- 2) Pegando elementos do HTML ----------
+// Elementos do HTML
 const listaCards   = document.getElementById("lista-cards");
 const campoBusca   = document.getElementById("busca");
 const filtroStatus = document.getElementById("filtro-status");
@@ -22,9 +19,9 @@ const btnProxima   = document.getElementById("btn-proxima");
 const infoPagina   = document.getElementById("info-pagina");
 const mensagem     = document.getElementById("mensagem");
 
-// ---------- 3) Consumindo a API com fetch ----------
+// Busca na API
 async function buscarPersonagens() {
-  // Monta a URL com os parâmetros: ?page=1&name=rick&status=alive
+  // Monta parâmetros
   const params = new URLSearchParams({ page: paginaAtual });
   if (campoBusca.value.trim()) params.set("name", campoBusca.value.trim());
   if (filtroStatus.value)      params.set("status", filtroStatus.value);
@@ -33,10 +30,10 @@ async function buscarPersonagens() {
   listaCards.innerHTML = "";
 
   try {
-    // fetch devolve uma Promise; "await" espera a resposta chegar
+    // Requisição
     const resposta = await fetch(`${API_URL}?${params}`);
 
-    // A API responde 404 quando a busca não encontra nada
+    // 404: nada encontrado
     if (resposta.status === 404) {
       totalPaginas = 1;
       atualizarPaginacao();
@@ -45,26 +42,27 @@ async function buscarPersonagens() {
     }
     if (!resposta.ok) throw new Error("Erro HTTP " + resposta.status);
 
-    // Converte o corpo da resposta de texto JSON para objeto JavaScript
+    // JSON para objeto
     const dados = await resposta.json();
-    console.log("Resposta da API:", dados); // útil para mostrar no vídeo!
+    console.log("Resposta da API:", dados); // Para o vídeo
 
     totalPaginas = dados.info.pages;
     mensagem.textContent = `${dados.info.count} personagens encontrados`;
     renderizarCards(dados.results);
     atualizarPaginacao();
   } catch (erro) {
+    // Erro de rede
     console.error(erro);
     mensagem.textContent = "Erro ao carregar os dados. Verifique sua internet e tente de novo.";
   }
 }
 
-// ---------- 4) Criando os cards com DOM (createElement + appendChild) ----------
+// Cria um card
 function criarCard(personagem) {
   const card = document.createElement("article");
   card.className = "card";
 
-  // Botão de coração (favoritar)
+  // Coração
   const coracao = document.createElement("button");
   coracao.className = "btn-coracao";
   coracao.type = "button";
@@ -80,9 +78,9 @@ function criarCard(personagem) {
   const imagem = document.createElement("img");
   imagem.src = personagem.image;
   imagem.alt = "Foto de " + personagem.name;
-  imagem.loading = "lazy"; // só carrega a imagem quando aparece na tela
+  imagem.loading = "lazy"; // Carrega sob demanda
 
-  // Informações extras (status, espécie, origem, episódios)
+  // Informações
   const infos = document.createElement("ul");
   const linhas = [
     ["Status", personagem.status, true],
@@ -102,7 +100,7 @@ function criarCard(personagem) {
     infos.appendChild(li);
   });
 
-  // Monta o card: cada appendChild coloca um elemento dentro do outro
+  // Monta o card
   card.appendChild(coracao);
   card.appendChild(nome);
   card.appendChild(imagem);
@@ -110,12 +108,13 @@ function criarCard(personagem) {
   return card;
 }
 
+// Mostra os cards
 function renderizarCards(personagens) {
   listaCards.innerHTML = "";
   personagens.forEach((p) => listaCards.appendChild(criarCard(p)));
 }
 
-// ---------- 5) Favoritos ----------
+// Favoritar / desfavoritar
 function alternarFavorito(personagem, botao) {
   if (favoritos[personagem.id]) {
     delete favoritos[personagem.id];
@@ -125,10 +124,11 @@ function alternarFavorito(personagem, botao) {
     botao.textContent = "♥";
   }
   localStorage.setItem("favoritos", JSON.stringify(favoritos));
-  // Se estamos na tela de favoritos, recarrega a lista (o card desfavoritado some)
+  // Atualiza lista de favoritos
   if (mostrandoFavoritos) mostrarFavoritos();
 }
 
+// Lista só favoritos
 function mostrarFavoritos() {
   const lista = Object.values(favoritos);
   renderizarCards(lista);
@@ -140,35 +140,39 @@ function mostrarFavoritos() {
   btnProxima.disabled = true;
 }
 
-// ---------- 6) Paginação e eventos ----------
+// Atualiza paginação
 function atualizarPaginacao() {
   infoPagina.textContent = `Página ${paginaAtual} de ${totalPaginas}`;
   btnAnterior.disabled = paginaAtual <= 1;
   btnProxima.disabled = paginaAtual >= totalPaginas;
 }
 
+// Volta à busca normal
 function recarregar() {
   mostrandoFavoritos = false;
   btnFavoritos.classList.remove("ativo");
   buscarPersonagens();
 }
 
+// Botões de página
 btnAnterior.addEventListener("click", () => { paginaAtual--; buscarPersonagens(); window.scrollTo(0, 0); });
 btnProxima.addEventListener("click",  () => { paginaAtual++; buscarPersonagens(); window.scrollTo(0, 0); });
 
-// Busca: espera o usuário parar de digitar por 400ms (evita chamar a API a cada letra)
+// Busca com atraso
 let temporizador;
 campoBusca.addEventListener("input", () => {
   clearTimeout(temporizador);
   temporizador = setTimeout(() => { paginaAtual = 1; recarregar(); }, 400);
 });
+// Filtro de status
 filtroStatus.addEventListener("change", () => { paginaAtual = 1; recarregar(); });
 
+// Botão favoritos
 btnFavoritos.addEventListener("click", () => {
   mostrandoFavoritos = !mostrandoFavoritos;
   btnFavoritos.classList.toggle("ativo", mostrandoFavoritos);
   if (mostrandoFavoritos) mostrarFavoritos(); else buscarPersonagens();
 });
 
-// ---------- 7) Começa tudo ao abrir a página ----------
+// Início
 buscarPersonagens();
